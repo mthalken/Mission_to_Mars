@@ -22,8 +22,8 @@ def scrape_all():
         "news_paragraph": news_paragraph,
         "featured_image": featured_image(browser),
         "facts": mars_facts(),
-        "last_modified": dt.datetime.now(),
-        "hemisphere_images": hemisphere_images(browser)
+        "hemisphere_images": hemisphere_images(browser),
+        "last_modified": dt.datetime.now()
     }
 
     # Stop webdriver and return data
@@ -104,48 +104,70 @@ def mars_facts():
     except BaseException:
         return None
 
-    df.columns=['description', 'Mars', 'Earth']
-    df.set_index('description', inplace=True)
+    df.columns=['Description', 'Mars', 'Earth']
+    df.set_index('Description', inplace=True)
 
     return df.to_html(classes="table table-striped")
 
 
 ### Mars Hemisphere Images
 def hemisphere_images(browser):
-    
+    #visit main url
+    main_url = "https://marshemispheres.com/"
+    browser.visit(main_url)
+
+    #create lists
     hemisphere_image_urls = []
 
-    main_url = "https://marshemispheres.com/"
-    try:
+    #use soup to read 
+    html = browser.html
+    img_soup = soup(html, 'html.parser')
+
+    #use soup to go to next level
+    item = img_soup.find_all('div', class_='item')
+    # items = soup(html, 'html.parser')
+
+    for x in item:
+        
+        hemispheres = {}
+        #find title text
+        title = x.find('h3').text
+        
+        #find link to thumb
+        link = x.find('a', class_='itemLink product-item')['href']
+
+        #create path to link
+        page = main_url + link
+
+        # visit link page
+        browser.visit(page)
+
+        #use soup to read page
         html = browser.html
-        img_soup = soup(html, 'html.parser')
+        page_soup = soup(html, 'html.parser')
 
-        items = img_soup.find_all('div', class_='item')
+        #find path 
+        large_image = page_soup.find_all('div', class_='downloads')
 
-        # Write code to retrieve the image urls and titles for each hemisphere.
-        for x in items:
-            results = {}
-            
-            #find the title
-            title = x.find('h3').text
-            
-            #get the link to the specific image
-            link = x.find('a', class_='itemLink product-item')['href']
-            
-            #create a link for the large image
-            browser.visit(main_url + link)
-            
-            #go to image page
-            image_html = browser.html
-            soup_spec = soup(image_html, 'html.parser')
-            img_download = soup_spec.find('img', class_='wide-image')['src']
-            
-            hemisphere_image_urls.append({'title': title, 'img_download': main_url + img_download})
+        #parse the page
+        large_image = soup(html, 'html.parser')
 
-        return hemisphere_image_urls
+        #find the large image
+        image_download = large_image.find('img', class_='wide-image')['src']
 
-    except BaseException:
-        return None
+        #create the url link
+        final_image = main_url + image_download
+
+    #     browser.back()
+
+        # add to hemispheres
+        hemispheres['final_image'] = final_image
+        hemispheres['title'] = title
+
+        #append hemisphere_image_urls
+        hemisphere_image_urls.append(hemispheres)
+
+    return hemisphere_image_urls
 
 
 if __name__ == "__main__":
