@@ -1,6 +1,6 @@
 # Files to ignore:
 practice.ipynb
-layout.html
+templates/layout.html
 main.css
 
 
