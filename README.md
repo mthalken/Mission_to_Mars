@@ -15,24 +15,12 @@
     - [galaxyfacts-mars.com](https://galaxyfacts-mars.com)
     - [marshemispheres.com](https://marshemispheres.com/)
 - Software: Flask 2.0.2, MongoDB 5.0.4, HTML, CSS, Splinter, BeautifulSoup, ChromeDriverManager, PyMongo, Python 3.7.10, Conda 4.10.3, Jupyter Notebook 6.3.0, Visual Studio Code 1.60.2
-- Please see the app.py code [here]().
-- Please see the index.html code [here]().
-- Please see the scraping.py code [here]().
+- Please see the app.py code [here](https://github.com/mthalken/Mission_to_Mars/blob/main/app.py).
+- Please see the index.html code [here](https://github.com/mthalken/Mission_to_Mars/blob/main/index.html).
+- Please see the scraping.py code [here](https://github.com/mthalken/Mission_to_Mars/blob/main/scraping.py).
 
 ## Results 
-### The analysis
-- What are two conclusions you can draw?
+![png](https://github.com/mthalken/Mission_to_Mars/blob/main/images/site1.png)
+![png](https://github.com/mthalken/Mission_to_Mars/blob/main/images/site2.png)
+![png](https://github.com/mthalken/Mission_to_Mars/blob/main/images/site3.png)
 
-- What can you conclude?
-
-- What are some limitations of this dataset?
-
-- What are some other possible tables and/or graphs that we could create?
-
-## Summary
-
-
-
-
-image link: ![png](link)
-clink link: [here](link)

@@ -1,9 +1,9 @@
 # Files to ignore:
-practice.ipynb
+Resources/practice.ipynb
 templates/layout.html
 main.css
 layout.html
-Mision_to_Mars_Challenge_starter_code.ipynb
+Resources/Mision_to_Mars_Challenge_starter_code.ipynb
 
 
 # Byte-compiled / optimized / DLL files
